@@ -1,0 +1,40 @@
+.content {
+    text-align: center;
+    width: 80%;
+    margin:auto;
+}
+
+.title{
+    text-align: left;
+    display: inline-block;
+    vertical-align: top;
+    width: 48%;
+}
+
+.cover{
+    width: 168px;
+    height: 237px;
+}
+
+.red{
+    font-weight: 700;
+    color: #ff0000;
+}
+
+.preview{
+    color:#ff0000;
+}
+.olo{
+    line-height: 120%;
+    font-size: 12px;
+    width: 100%;
+    text-align: left;
+    display: inline-block;
+}
+fieldset {
+    margin-left: 10%;
+}
+fieldset a:link {color: #4a4a4a; text-decoration: none} /* 未访问的链接 */
+fieldset a:visited {color: #4a4a4a; text-decoration: none} /* 已访问的链接 */
+fieldset a:hover {color: #227fbd; text-decoration: none} /* 鼠标在链接上 */
+fieldset a:active {color: #227fbd; text-decoration: none} /* 激活链接 */

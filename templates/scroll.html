@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/scroll.css')}}" type="text/css">
+{% endblock %}
+{% block body %}
+<div class="content">
+    <div id="title">{{title}}</div>
+    <table>
+        {% for sc in scrolls %}
+            <tr><td class="vcss" colspan="4">{{sc}}</td></tr>
+                {% for i in scrolls[sc] %}
+                {% if loop.index % 4 == 1 %}
+                    <tr>
+                {% endif %}
+                <td class="ccss"><a href="{{i.chapterid}}">{{i.chapter_name}}</a></td>
+                <!-- 转换string方法 先list后join 用|join-->
+                {% if loop.index % 4 ==0 or loop.index == loop.last %}
+                    </tr>
+                {% endif %}
+                {% endfor %}
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

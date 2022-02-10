@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/noval.css')}}" type="text/css">
+{% endblock %}
+{% block body %}
+<div class="top">
+    背景颜色:
+    <select name="bcolor" id="bcolor" onchange="javascript:document.bgColor=this.options[this.selectedIndex].value;">
+        <option style="background-color: #f6f6f6" value="#f6f6f6">默认</option>			  
+        <option style="background-color: #ffffff" value="#ffffff">白色</option>              
+        <option style="background-color: #e4ebf1" value="#e4ebf1">淡蓝</option>			  
+        <option style="background-color: #e6f3ff" value="#e6f3ff">蓝色</option>               
+        <option style="background-color: #eeeeee" value="#eeeeee">淡灰</option>              
+        <option style="background-color: #eaeaea" value="#eaeaea">灰色</option>                
+        <option style="background-color: #e4e1d8" value="#e4e1d8">深灰</option>
+        <option style="background-color: #e6e6e6" value="#e6e6e6">暗灰</option>              
+        <option style="background-color: #eefaee" value="#eefaee">绿色</option>
+        <option style="background-color: #ffffed" value="#ffffed">明黄</option>
+    </select>
+    字体颜色:
+    <select name="txtcolor" id="txtcolor" onchange="javascript:document.getElementById('content').style.color=this.options[this.selectedIndex].value;"> 			  
+        <option value="#000000">黑色</option>              
+        <option value="#ff0000">红色</option>              
+        <option value="#006600">绿色</option>              
+        <option value="#0000ff">蓝色</option>              
+        <option value="#660000">棕色</option>			  
+    </select>
+    字体大小:
+    <select name="fonttype" id="fonttype" onchange="javascript:document.getElementById('content').style.fontSize=this.options[this.selectedIndex].value;"> 			  
+        <option value="12px">小号</option> 			  
+        <option value="14px">较小</option> 			  
+        <option value="16px">中号</option>			  
+        <option value="18px">较大</option>			  
+        <option value="24px">大号</option>			  
+    </select>
+</div>
+<div id='content'>
+    <div id='title'>{{title}} {{novel.chapter_name}}</div>
+    <div id='wenku'>
+        {% autoescape false %}{{novel.txt}}{% endautoescape %}
+        {% for img in novel.chatu%}
+        <img src="{{img}}" />
+        {% endfor %}
+    </div>
+</div>
+<script>
+    // var txt = "##novel.txt}}";
+    // txt = txt.replace('\n', '<br/>')
+    // var wenku = documnet.getElementById('wenku');
+    // wenku.innerHTML = txt;
+    // imgs = imgs.replace("&#34;", "\"");
+    // imgs = eval('(' + imgs + ')');
+    // for (let i=0;i<imgs.length;i++) {
+    //     var img = document.createElement('img');
+    //     img.src = imgs[i];
+    //     wenku.appendChild(img);
+    // }
+</script>
+{% endblock %}

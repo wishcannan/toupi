@@ -1,0 +1,25 @@
+#title{
+    line-height: 200%;
+    font-size: 16px;
+    font-weight: bold;
+}
+.content{
+    text-align: center;
+    width: 80%;
+    margin:auto;
+    background-color: #f6f6f6;
+}
+
+.vcss{
+    width: 100%;
+    font-size: 16px;
+    background: #e4e1d8;
+    text-align: center;
+}
+.ccss{
+    font-size: 14px;
+    background: #f0f0f0;
+    width: 25%;
+    text-align: left;
+}
+table{width: 100%;}

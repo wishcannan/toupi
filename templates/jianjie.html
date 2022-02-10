@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/novel.css')}}" type="text/css">
+{% endblock %}
+{% block body %}
+<div class="content">
+    <div>
+        <img src="{{novel.cover}}" class="cover">
+        <div class="title">
+            <span><b>{{novel.title}}</b></span>
+            <P>小说作者：{{novel.author}}</P>
+            <P class="red">作品Tags：{{novel.tag}}</P>
+            <div><div class="preview">小说简介:</div>{% autoescape false %}{{novel.preview}}{% endautoescape %}</div>
+        </div>
+    </div>
+    <div class="olo">
+        <fieldset style="width:100px;height:35px;padding:0px;">
+            <legend>阅读</legend>
+            <div style="text-align:center"><a href="/novel/{{novel.id}}/index">小说目录</a></div>
+        </fieldset>
+    </div>
+</div>
+{% endblock %}
