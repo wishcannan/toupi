@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}" type="text/css">
+{% endblock %}
+{% block body %}
+<div class="fuji">
+    <div class="jiabujia">
+        <div class="navi">这里是导航</div><!--这里是导航栏-->
+        <div>
+            <div></div><!--这里是头图吧-->
+            <div class="content">
+                <div class="main">123</div>
+                <div class="right">
+                    {% for i in uls %}
+                        <div class="rank">
+                            <a href="/jianjie/{{i.id}}"><img src="{{i.cover}}" class="rankimg"></a>
+                            <a href="/jianjie/{{i.id}}">{{i.title}}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
