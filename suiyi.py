@@ -2,7 +2,7 @@ import pymysql
 from pymysql.cursors import DictCursor
 
 
-host, user, passwd, database = '255.255.255.255', 'user', 'passwd', 'db'
+host, user, passwd, database = '81.68.92.89', 'pipi', 'pipiAiqiq1_', 'db'
 db  = pymysql.connect(host=host,user=user,password=passwd,database=database,autocommit=True,cursorclass=DictCursor)
 curs = db.cursor()
 
@@ -42,8 +42,25 @@ def scrollfind(id):
     return qiantao(curs.fetchall())
 
 def chapterfind(id):
-    #chapterid
+    #chapterid ,scroll.novel_id ,scroll.scroll_name
     a = "select chapter.*, scroll.scroll_name,scroll.novel_id as nid from chapter left join scroll on chapter.scroll_id = scroll.id where chapter.id = %s"
     curs.execute(a,id)
     return curs.fetchone()
 
+def getrank10():
+    a = "select id,cover,title from novel LIMIT 10"
+    curs.execute(a)
+    return curs.fetchall()
+
+def next_chapter(novel_id,chapter_id,fangxiang):#这里三个参数 方向为string 字符
+    a = "select chapter.id from novel,scroll,chapter where %s = novel.id and chapter.scroll_id = scroll.id and scroll.novel_id = novel.id and chapter.id {} %s order by chapter.id {} limit 1"
+    flag = 'asc'
+    if fangxiang == '<':
+        flag = 'desc'
+    a = a.format(fangxiang,flag )
+    # print(a)
+    curs.execute(a,(novel_id,chapter_id))
+    return curs.fetchone()
+
+
+# print(next_chapter(1,15,'<'))
