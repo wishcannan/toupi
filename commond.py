@@ -1,15 +1,15 @@
 # import math
-from flask import Flask,render_template,jsonify
+from flask import Flask,render_template,redirect
 # from flask import render_template
 # import pymysql
 # from pymysql.cursors import DictCursor
 # pymysql.install_as_MySQLdb()
 # from flask_sqlalchemy import SQLAlchemy
-from suiyi import db,novelfind,scrollfind,chapterfind
+from suiyi import db,novelfind,scrollfind,chapterfind,getrank10,next_chapter
 import json
 
 
-app = Flask(__name__,static_folder='static',static_url_path='')
+app = Flask(__name__,static_folder='static',static_url_path='/static')
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://pipi:pipiAiqiq1_@81.68.92.89:3306/db?charset=utf8"
 # app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 
@@ -28,16 +28,9 @@ def hello_world():
 
 @app.route('/') 
 def index():
-    title = 'hahaha'
-    txt = ''
-    with open('01.txt','r',encoding='utf-8') as f:
-        c = f.readline()
-        while c:
-            txt += c
-            if pinjie(c):
-                txt += '<br>'
-            c = f.readline()
-    return render_template('/novel.html',title=title,txt=txt)
+    uls = getrank10()
+    #主页 2022.12开工
+    return render_template('/index.html',title="伪轻小说文库,抄袭第一名",uls=uls)
 
 @app.route('/jianjie/<id>')
 def jianjie(id):
@@ -74,6 +67,21 @@ def novel(id,bid):
     # novel.chatu = json.loads(novel.chatu)
     # print(novel.chatu)
     return render_template('/novel.html',title=a['scroll_name'],novel=a)
+
+@app.route('/page/<int:nid>/<int:cid>/<fangxiang>')
+def page(nid,cid,fangxiang):
+    flag = '>'
+    if fangxiang != 'next':
+        flag = '<'
+    a = next_chapter(nid,cid,flag)
+    if not a:
+        url = '/novel/{}/index'.format(nid)
+    else:
+        url = '/novel/{}/{}'.format(nid,a.get('id'))
+    print(url)
+    return redirect(url)
+    
+
 
 
 
