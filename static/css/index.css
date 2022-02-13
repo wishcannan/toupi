@@ -1,0 +1,33 @@
+.fuji{
+    text-align: center;
+}
+.jiabujia{
+    text-align: center;
+    margin: 0 auto;
+    background-color: aqua;
+    width: 80%;
+}
+.navi{
+    width: 100%;
+    background-color: darkgray;
+    line-height: 27px;
+    display: block;
+}
+.content{
+    width: 100%;
+    background-color:fuchsia;
+}
+.main{
+    display: inline-block;
+    width: 79%;
+    background-color: chartreuse;
+}
+.right{
+    display: inline-block;
+    width: 20%;
+    background-color:#fff;
+}
+a:link {color: #4a4a4a; text-decoration: none} /* 未访问的链接 */
+a:visited {color: #4a4a4a; text-decoration: none} /* 已访问的链接 */
+a:hover {color: #227fbd; text-decoration: none} /* 鼠标在链接上 */
+a:active {color: #227fbd; text-decoration: none} /* 激活链接 */

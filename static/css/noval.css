@@ -20,3 +20,14 @@
     width: 80%;
     margin:0 auto;
 }
+.footlink{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.footlink a{
+    margin: 10%;
+}
+a:link { text-decoration: none} /* 未访问的链接 */
+a:visited { text-decoration: none} /* 已访问的链接 */
+a:hover {color: #227fbd; text-decoration: none} /* 鼠标在链接上 */
+a:active {color: #227fbd; text-decoration: none} /* 激活链接 */
