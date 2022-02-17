@@ -27,6 +27,65 @@
     width: 20%;
     background-color:#fff;
 }
+.main{
+    font-size: 12px;
+}
+.bar3 {background: #F9F0DA;text-align: left;}
+.bar3 form {background: #A3D0C3;}
+.bar3 input {
+    margin-left: 2px;
+    background: transparent;/*清除背景*/
+    height: 40px;
+    line-height: 49px;
+    border: 0;
+    outline: 0;
+    width: 260px;
+    /* border-radius: 24px; */
+}
+/* input[type=text]:focus{ border: 1px solid #F9F0DA; } */
+.bar3 button {
+    background: transparent;/*清除背景*/
+    font-size: 12px;
+    left: 80px;
+    /* margin-right: 1px; */
+    border: 0px;
+    margin-left: auto;
+}
+.bar3 button:before {
+    /*在button前面插入内容*/
+    
+    font-size: 16px;
+    color: #F9F0DA;
+}
+/* .bar3 .ap {
+    padding: 10px;
+} */
+.bar3 .pp {
+    display:inline-block;
+    border: 1px solid;
+    width: 60px;
+    height: 20px;
+    color: #464646;
+    border-radius: 4px;
+    margin: 8px 4px 8px 8px;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+}
+.bar3 .bp {
+    margin-left: 4px;
+    border: 1px solid black;
+    border-radius: 24px;
+    width: 300px; 
+}
+.cp {
+    /* 選中狀態 */
+    background-color: #F9F0DA;
+}
+.dp {
+    /* 未选中状态 */
+    background-color: #fff;
+}
 a:link {color: #4a4a4a; text-decoration: none} /* 未访问的链接 */
 a:visited {color: #4a4a4a; text-decoration: none} /* 已访问的链接 */
 a:hover {color: #227fbd; text-decoration: none} /* 鼠标在链接上 */
