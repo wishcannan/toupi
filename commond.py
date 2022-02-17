@@ -1,11 +1,13 @@
 # import math
-from flask import Flask,render_template,redirect
+# from aiohttp import request
+from re import S
+from flask import Flask,render_template,redirect,request
 # from flask import render_template
 # import pymysql
 # from pymysql.cursors import DictCursor
 # pymysql.install_as_MySQLdb()
 # from flask_sqlalchemy import SQLAlchemy
-from suiyi import db,novelfind,scrollfind,chapterfind,getrank10,next_chapter
+from suiyi import *
 import json
 
 
@@ -80,6 +82,40 @@ def page(nid,cid,fangxiang):
         url = '/novel/{}/{}'.format(nid,a.get('id'))
     print(url)
     return redirect(url)
+
+@app.route('/search',methods=['GET','POST'])
+def search():
+    #这刷搜索功能 表单两个参数
+    # print(request.form)
+    # print(request.method)
+    page = 0
+    if request.method == 'GET':
+        keyword = request.args.get('keyword')
+        cp = request.args.get('cp')#类别 0 1
+        page = int(request.args.get('page'))
+    else:
+        keyword = request.form.get('keyword')
+        cp = request.form.get('cp')#类别 0 1
+    if not int(cp):
+        s = 'title'
+    else:
+        s = 'author'
+        # str.strip()
+    if keyword:
+        a = search_book(keyword=keyword.strip(),cp=s,page=page)
+        # print(a)
+        if len(a) == 1:
+            return redirect('/jianjie/{}'.format(a[0].get('id')))#如何是单个查询结果则301到简介页面
+        # b = (keyword,cp,page)
+        b1 = 'keyword={}&cp={}&page={}'
+        bb1 = b1.format(keyword,cp,page-1 if page-1 >= 0 else 0)
+        c1 = int((search_book2(keyword=keyword.strip(),cp=s).get('cid'))+9.5)//10 - 1#这是最大页数
+        bb2 = b1.format(keyword,cp,page+1 if page+1 <= c1 else c1)
+
+        return render_template('/search.html',title=keyword+'搜索结果',uls=a,three=(bb1,bb2))
+    else:
+        return '我劝你善良'
+
     
 
 
