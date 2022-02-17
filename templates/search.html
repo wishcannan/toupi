@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/search.css')}}" type="text/css">
+{% endblock %}
+{% block body %}
+<div class="content">
+    {%for i in uls%}
+    <div class="rank">
+        <a href="/jianjie/{{i.id}}"><img src="{{i.cover}}" class="rankimg"></a>
+        <a href="/jianjie/{{i.id}}">{{i.title}}</a>
+    </div>
+    {% endfor %}
+    <div>
+        <a href="search?{{three[0]}}">上一页</a>
+        <a href="search?{{three[1]}}">下一页</a>
+    </div>
+</div>
+{% endblock %}

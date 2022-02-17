@@ -1,21 +1,41 @@
 {% extends "layout.html" %}
 {% block head %}
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}" type="text/css">
+<script src="{{url_for('static',filename='js/index.js')}}"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 {% endblock %}
 {% block body %}
 <div class="fuji">
     <div class="jiabujia">
-        <div class="navi">这里是导航</div><!--这里是导航栏-->
+        <div class="navi">这里是导航</div>
+        <!--这里是导航栏-->
         <div>
-            <div></div><!--这里是头图吧-->
+            <div></div>
+            <!--这里是头图吧-->
             <div class="content">
-                <div class="main">123</div>
+                <div class="main">
+                    <div class="bookcase">
+                    </div>
+                    <div class="searchform">
+                        <form action="/search" method="post" class="bar3" id="search" target="_blank">
+                            <div class="ap">
+                                <div class="novel pp cp">小説標題</div>
+                                <div class="author pp dp">作者</div>
+                                <div class="bp">
+                                    <input name="keyword" type="text" placeholder="请输入您要搜索的内容...">
+                                    <input id="cp" name="cp" type="text" style="display: none;" value="0">
+                                    <button type="submit">^_^</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="right">
                     {% for i in uls %}
-                        <div class="rank">
-                            <a href="/jianjie/{{i.id}}"><img src="{{i.cover}}" class="rankimg"></a>
-                            <a href="/jianjie/{{i.id}}">{{i.title}}</a>
-                        </div>
+                    <div class="rank">
+                        <a href="/jianjie/{{i.id}}"><img src="{{i.cover}}" class="rankimg"></a>
+                        <a href="/jianjie/{{i.id}}">{{i.title}}</a>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
