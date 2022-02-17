@@ -62,5 +62,16 @@ def next_chapter(novel_id,chapter_id,fangxiang):#这里三个参数 方向为str
     curs.execute(a,(novel_id,chapter_id))
     return curs.fetchone()
 
+def search_book(keyword,cp,page:int):
+    a = 'SELECT id,title,cover FROM novel WHERE {} LIKE %s limit %s,10'.format(cp)
+    # print(a, keyword)
+    curs.execute(a,('%'+keyword+'%',page*10))
+    return curs.fetchall()
+
+def search_book2(keyword,cp):#用来查最大页数
+    a = 'select count(id) as cid from novel where {} like %s'.format(cp)
+    curs.execute(a,('%'+keyword+'%'))
+    return curs.fetchone()#返回cid 是查询出来的所有数目
+
 
 # print(next_chapter(1,15,'<'))
