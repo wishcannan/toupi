@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<h1>{{title}}</h1>
+<form method='post' enctype=multipart/form-data action="/upload">
+  <input type=file name=file>
+  <input type=submit value=Upload>
+</form>
+<div style="width: 400px;">
+  {% if img_filename %}
+    <img src="{{img_filename}}" style="width: 400px;">
+  {% endif %}
+</div>
+{% endblock %}

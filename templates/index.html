@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block head %}
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}" type="text/css">
+<script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
 <script src="{{url_for('static',filename='js/index.js')}}"></script>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 {% endblock %}
@@ -15,6 +16,15 @@
             <div class="content">
                 <div class="main">
                     <div class="bookcase">
+                        <table id="chuangyixuanshou" cellpadding="0">
+                            <tr>
+                                <th>名称</th>
+                                <th>书签</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <a href="/upload" target="_blank">古典图片在线复古</a>
                     </div>
                     <div class="searchform">
                         <form action="/search" method="post" class="bar3" id="search" target="_blank">
