@@ -48,7 +48,8 @@ def chapterfind(id):
     return curs.fetchone()
 
 def getrank10():
-    a = "select id,cover,title from novel LIMIT 10"
+    #随机10本
+    a = "select id,cover,title from novel order by rand() LIMIT 10"
     curs.execute(a)
     return curs.fetchall()
 
@@ -73,5 +74,17 @@ def search_book2(keyword,cp):#用来查最大页数
     curs.execute(a,('%'+keyword+'%'))
     return curs.fetchone()#返回cid 是查询出来的所有数目
 
+def getnovelnames(ids):#参数是int 元组
+    a = 'select id,title from novel where id in (%s)'%','.join(["%s"]*len(ids))
+    curs.execute(a,ids)
+    return curs.fetchall()
+
+def getChaptername(ids):
+    a = 'select id,chapter_name from chapter where id in (%s)'%','.join(["%s"]*len(ids))
+    curs.execute(a,ids)
+    return curs.fetchall()
+    ###目前为止这两个方法很好用 受限表设计问题 好的
 
 # print(next_chapter(1,15,'<'))
+# print(getnovelnames((1,2,3,4,5)))
+# print(['%s']*3)
