@@ -1,14 +1,8 @@
-# import math
-# from aiohttp import request
-from re import S
-from flask import Flask,render_template,redirect,request
-# from flask import render_template
-# import pymysql
-# from pymysql.cursors import DictCursor
-# pymysql.install_as_MySQLdb()
-# from flask_sqlalchemy import SQLAlchemy
+from flask import Flask,render_template,redirect,request,jsonify,flash
 from suiyi import *
 import json
+from werkzeug.utils import secure_filename
+from noise import lp2 #这个是我噪声处理图片功能模块 参数只接受一个file
 
 
 app = Flask(__name__,static_folder='static',static_url_path='/static')
@@ -116,6 +110,58 @@ def search():
     else:
         return '我劝你善良'
 
+@app.route('/getnovelchaptername')
+def qishenmefangfaming():
+    novel_data = json.loads(request.args.get('data'))#这里是list里面大概是 [novelid_chapterid,]
+    alist,blist,cdict = [],[],{}
+    res= []
+    for i in novel_data:
+        a,b = i.split('_')
+        alist.append(a)
+        blist.append(b)
+        cdict[str(a)] = b
+    
+    d = getnovelnames(tuple(alist))
+    e = getChaptername(tuple(blist))
+    for i in d:
+        nid = i.get('id')
+        cid = cdict.get(str(nid))
+        r = {'id':nid, 'cid':cid, 'name':i.get('title')}
+        for j in range(len(e)):
+            if int(cid) == e[j]['id']:
+                r['cname'] = e[j]['chapter_name']
+                e.pop(j)
+                break
+        res.append(r)
+    # print(res,'woderenwuwanchengl')
+    return jsonify(res)
+
+ALLOWED_EXTENSIONS = {'png','jpg','jpeg','bmp'}
+def allowed_file(filename):
+    #这个方法检测文件名是否符合我们要求的后缀
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):#
+            filename = secure_filename(file.filename)
+            # print('图片准备进去了')
+            lp2(file,filename)
+            # print('出来了')
+            return render_template('upload.html',title='记得接受结果',img_filename='/static/img2/'+filename)
+    else:
+        return render_template('upload.html',title='Upload new File')
+            # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # return redirect(url_for('download_file', name=filename))
+        
     
 
 
@@ -124,4 +170,4 @@ def search():
 
 
 if __name__ == '__main__':
-    app.run(host='0,0,0,0',port = 5000,debug=True)
+    app.run(host='localhost',port = 5000,debug=True)
