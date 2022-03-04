@@ -35,4 +35,49 @@ window.onload=function(){
     //         console.log(b.elements[i])
     //     }
     // }
+    function getnovelitem(){
+        var a = localStorage.getItem('novelitem')
+        if(a != null){
+            a = a.split(',')
+            return a
+        }
+        return []
+    }
+    function getchapter(l){
+        for(var i = 0;i<l.length;i++){
+            var v = localStorage.getItem('charpter'+l[i])
+            if(a != null){
+                l[i] = l[i]+'_'+v
+            }
+        }
+        return l
+    }
+    function appendtable(rt){
+        var $table = $('#chuangyixuanshou')
+        for(var i = 0;i < rt.length;i++){
+            var $tr = $('<tr></tr>')
+            var $td1 = $('<td></td>')
+            var $td2 = $('<td></td>')
+            var $a1 = $('<a target="_blank"></a>')
+            $a1.attr('href','/jianjie/' + rt[i].id)
+            $a1.text(rt[i].name)
+            $td1.append($a1)
+            var $a2 = $('<a target="_blank"></a>')
+            $a2.attr('href','/novel/' + rt[i].id+'/'+rt[i].cid)
+            $a2.text(rt[i].cname)
+            $td2.append($a2)
+            $tr.append($td1)
+            $tr.append($td2)
+            $table.append($tr)
+        }
+        // $table.append('<tr><td></td></tr>')
+    }
+    var l = getchapter(getnovelitem())
+    $.get(
+        '/getnovelchaptername',{
+            'data':JSON.stringify(l)
+        },function(rt){
+            appendtable(rt)
+        }
+    )
 }
