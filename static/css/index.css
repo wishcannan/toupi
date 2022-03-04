@@ -30,6 +30,19 @@
 .main{
     font-size: 12px;
 }
+.main table {
+    /* border: 1px solid black; */
+    width: 90%;
+    margin: 10px 20px;
+    border-collapse: collapse;
+}
+.main table tr{
+    border: 1px solid black;
+}
+.main table td{
+    min-width: 200px;
+    border:  1px solid black;
+}
 .bar3 {background: #F9F0DA;text-align: left;}
 .bar3 form {background: #A3D0C3;}
 .bar3 input {
