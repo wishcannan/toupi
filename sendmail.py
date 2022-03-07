@@ -5,10 +5,10 @@ from email.mime.text import MIMEText
 from email.header import Header
 
 # 发信方的信息：发信邮箱，QQ 邮箱授权码
-from_addr = '1845992492@qq.com'
-password = 'azebyuydfsbgcfjg'
+from_addr = '*************@qq.com'
+password = '**************'
 # 收信方邮箱
-to_addr = '1845992492@qq.com'
+to_addr = '***********@qq.com'
 smtp_server = 'smtp.qq.com'
 # 邮箱正文内容，第一个参数为内容，第二个参数为格式(plain 为纯文本)，第三个参数为编码
 msg = MIMEText('这次爬取结束了','plain','utf-8')
