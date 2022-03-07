@@ -10,6 +10,7 @@ import sys
 import re
 import pymysql
 import logging
+from sendmail import logsmail
 LOG_FORMAT = "%(asctime)s %(name)s %(levelname)s  %(message)s "#配置输出日志格式
 DATE_FORMAT = '%Y-%m-%d  %H:%M:%S' #配置输出时间的格式，注意月份和天数不要搞乱了
 
@@ -206,5 +207,7 @@ if __name__=='__main__':
             logging.info('第{}bookid抓取完毕'.format(i))
         except Exception as e:
             logging.error(e)
+    logsmail()
+    
     # for id in ids:
     #     W.getbook(int(id))
