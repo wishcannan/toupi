@@ -3,6 +3,9 @@ from suiyi import *
 import json
 from werkzeug.utils import secure_filename
 from noise import lp2 #这个是我噪声处理图片功能模块 参数只接受一个file
+from redissuiyi import getredis #这个实现一个简单的连接池
+import time
+# import redis
 
 
 app = Flask(__name__,static_folder='static',static_url_path='/static')
@@ -25,8 +28,22 @@ def hello_world():
 @app.route('/') 
 def index():
     uls = getrank10()
+    r=getredis()
+    IP_Add = request.headers.get('X-Real-IP')
+    # print(request.remote_addr)#这个获取request 访问ip
+    if not r.exists('hotip'):
+        a = time.time()+86400
+        tomorow = time.mktime(time.strptime(time.strftime("%a %b %d 0:0:0 %Y",time.localtime(a))))
+        r.sadd('hotip',IP_Add)
+        r.incr('hot',1)
+        r.expireat('hotip',int(tomorow))
+    else:
+        if not r.sismember('hotip',IP_Add):
+            r.sadd('hotip',IP_Add)
+            r.incr('hot',1)
+    hot = str(r.get('hot'),encoding='utf-8')
     #主页 2022.12开工
-    return render_template('/index.html',title="伪轻小说文库,抄袭第一名",uls=uls)
+    return render_template('/index.html',title="伪轻小说文库,抄袭第一名",uls=uls,hot=hot)
 
 @app.route('/jianjie/<id>')
 def jianjie(id):
@@ -170,4 +187,4 @@ def upload_file():
 
 
 if __name__ == '__main__':
-    app.run(host='localhost',port = 5000,debug=True)
+    app.run(host='localhost',port = 5000,debug=False)
