@@ -1,7 +1,7 @@
 # from multiprocessing import pool
 import redis
 
-# r = redis.StrictRedis(host='81.68.92.89',port=6379, db=0,password='memochou')
+# r = redis.StrictRedis(host='81.68.92.89',port=6379, db=0,password='******')
 # r.set('hot', '1')
 
 # print(r.ping())
@@ -18,6 +18,6 @@ def getredis():
     #用作返回一个可以操作的redis对象
     global Pool 
     if not Pool:
-        Pool = redis.ConnectionPool(host='81.68.92.89', port=6379,password='memochou',max_connections=10,db=0)
+        Pool = redis.ConnectionPool(host='81.68.92.89', port=6379,password='*******',max_connections=10,db=0)
     return redis.Redis(connection_pool=Pool)
 
