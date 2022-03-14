@@ -2,7 +2,7 @@ import pymysql
 from pymysql.cursors import DictCursor
 
 
-host, user, passwd, database = '81.68.92.89', 'pipi', 'pipiAiqiq1_', 'db'
+host, user, passwd, database = '*********', 'pipi', '********', 'db'
 db  = pymysql.connect(host=host,user=user,password=passwd,database=database,autocommit=True,cursorclass=DictCursor)
 curs = db.cursor()
 
